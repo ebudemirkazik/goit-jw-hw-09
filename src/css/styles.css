@@ -64,6 +64,8 @@ input::-webkit-inner-spin-button {
 
 #gallery {
   padding: 25px 0;
+  background: #e8ecee;
+  
 }
 
 #gallery h1 {
