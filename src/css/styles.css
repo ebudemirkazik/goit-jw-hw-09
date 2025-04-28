@@ -12,7 +12,6 @@ body {
   background-color: #ffffff;
   color: #212121;
   line-height: 1.5;
-  padding: 20px;
 }
 
 ul,
@@ -61,6 +60,10 @@ input::-webkit-inner-spin-button {
 
 .container-index a:hover {
   transform: scale(1.02);
+}
+
+#gallery {
+  padding: 25px 0;
 }
 
 #gallery h1 {

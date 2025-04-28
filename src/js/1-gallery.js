@@ -71,47 +71,28 @@ const images = [
 
 const galleryContainer = document.querySelector(".gallery");
 
+// Galeri içeriğini oluşturuyoruz
 const galleryMarkup = images
-  .map(
-    ({ preview, original, description }) => `
-    <li class="gallery-item">
-      <a class="gallery-link" href="${original}">
-        <img
-          class="gallery-image"
-          src="${preview}"
-          data-source="${original}"
-          alt="${description}"
-        />
-      </a>
-    </li>`
-  )
-  .join("");
+  .map(({ preview, original, description }) => {
+    return `
+      <li class="gallery-item">
+        <a class="gallery-link" href="${original}">
+          <img 
+            class="gallery-image" 
+            src="${preview}" 
+            alt="${description}" 
+          />
+        </a>
+      </li>
+    `;
+  })
+  .join('');
 
-galleryContainer.insertAdjacentHTML("beforeend", galleryMarkup);
+// Oluşturulan HTML'i sayfaya ekliyoruz
+galleryContainer.innerHTML = galleryMarkup;
 
-galleryContainer.addEventListener("click", (e) => {
-  e.preventDefault(); // yeni sayfada açılmasını engeller
-
-  const clickedImage = e.target;
-  if (clickedImage.nodeName !== "IMG") return;
-
-  const bigImageUrl = clickedImage.dataset.source;
-
-  const instance = basicLightbox.create(`
-      <img src="${bigImageUrl}" width="1280" height="720">
-    `);
-
-  instance.show();
-
-  document.addEventListener("keydown", function escListener(event) {
-    if (event.key === "Escape") {
-      instance.close();
-      document.removeEventListener("keydown", escListener);
-    }
-  });
-});
-
-new SimpleLightbox(".gallery a", {
-  captionDelay: 250,
-  captionsData: "alt",
+// SimpleLightbox'u başlatıyoruz
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',   // Açıklamayı alt özelliğinden al
+  captionDelay: 250,     // Açıklamayı 250ms sonra göster
 });
